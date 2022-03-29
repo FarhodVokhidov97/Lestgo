@@ -1,0 +1,166 @@
+{#{% extends 'base.html' %}#}
+{#{% block pc %}#}
+{#    <div class="container d-flex justify-content-sm-between align-self-start">#}
+{#        <div class="mr-md-3">#}
+{#            {% for Category in category %}#}
+{#                <a href="/?category={{ Category.id}}">#}
+{#                    <div class="alert alert-primary" role="alert">#}
+{#                  {{ Category.name }}#}
+{#                    </div>#}
+{#                </a>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        <div class="d-flex  align-self-start flex-wrap">#}
+{#            {% for Book in pc %}#}
+{#                <a class="Booklist" href="#">#}
+{#                 <div class="card border border border-primary mr-md-3 shadow-lg p-3 mb-5 bg-white rounded " style="width: 18rem;">#}
+{#                     <img src="{{ Book.img.url }}" class="card-img-top">#}
+{#                     <div class="card-body">#}
+{#                     <P>{{ Book.title }}</P>#}
+{#                        <div class=" price">#}
+{#                             <p class="price-text">{{ Book.price }} BY</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                 </div>#}
+{#                </a>#}
+{##}
+{#            {% endfor %}#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#{% endblock pc %}#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Shop Homepage - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{% url 'viewpc' %}">Apple</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Категории</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for Category in category %}
+                            <li><a class="dropdown-item" href="/?category={{ Category.id }}">{{ Category.name }}</a>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex">
+                {% if user.is_authenticated %}
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </button>
+
+                {% else %}
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        <a href="{% url 'login' %}">Login</a>
+                    </button>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+</nav>
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Apple Shop</h1>
+            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+        </div>
+    </div>
+</header>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <table class="table">
+                <div class="d-flex justify-content-evenly">
+                    <div>
+                        <img class="img" src="{{ PC.img.url }}" alt="..."/>
+                    </div>
+                    <style>
+                        .price {
+                            margin-left: 30px;
+                            margin-bottom: 15px;
+                        }
+
+                        .img {
+                            width: 400px;
+                            height: 400px;
+                            object-fit: fill;
+                            margin-bottom: 100px;
+                        }
+                    </style>
+                    <div>
+                        <h1 class="price">{{ PC.price }}$</h1>
+                        <a class="btn btn-primary price" href="{% url 'cart' %}">
+                                    <h3>Купить</h3>
+                                </a>
+                            </div>
+
+                        </div>
+                        <tbody>
+                            <tr>
+                                <td>Название</td>
+                                <td>{{ PC.title }}</td>
+                            </tr>
+                            <tr>
+                                <td>Оперативная память</td>
+                                <td>{{ PC.pamyat }}</td>
+                            </tr>
+                                <tr>
+                                <td>Размер экрана</td>
+                                <td>{{ PC.ekran }}</td>
+                            </tr>
+                                <tr>
+                                <td>ОЗУ</td>
+                                <td>{{ PC.ozu }}</td>
+                            </tr>
+                            <tr>
+                                <td>Аккамулятор</td>
+                                <td>{{ PC.battery }}</td>
+                            </tr><tr>
+                                <td>Цвет</td>
+                                <td>{{ PC.color }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class=" py-5 bg-dark">
+                        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website
+                            2021</p></div>
+                        </footer>
+                        <!-- Bootstrap core JS-->
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                        <!-- Core theme JS-->
+                        <script src="js/scripts.js"></script>
+</body>
+</html>
